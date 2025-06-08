@@ -1,7 +1,8 @@
 package com.thechance.myweather.domain.dataSource
 
-import android.location.Location
+import com.thechance.myweather.domain.model.UserLocation
 
 interface LocationDataSource {
-    suspend fun getCurrentLocation(): Result<Location>
+
+    suspend fun getCurrentLocation(): Result<UserLocation>
 }
