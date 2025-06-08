@@ -1,4 +1,4 @@
-package com.thechance.myweather.ui.theme
+package com.thechance.myweather.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
