@@ -3,6 +3,7 @@ package com.thechance.myweather.core
 import android.app.Application
 import com.thechance.myweather.data.di.dataModule
 import com.thechance.myweather.domain.di.domainModule
+import com.thechance.myweather.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,6 +17,7 @@ class App: Application() {
             androidLogger()
             modules(
                 domainModule,
+                presentationModule,
                 dataModule
             )
         }
