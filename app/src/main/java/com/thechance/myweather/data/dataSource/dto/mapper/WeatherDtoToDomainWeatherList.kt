@@ -37,7 +37,7 @@ private fun createWeather(
         time = LocalDateTime.parse(time),
         temperatureCelsius = temperature,
         feelsLikeTemperatureCelsius = apparentTemperature,
-        weatherCode = weatherCode,
+        weatherStatus = weatherCode.toWeatherStatus(),
         windSpeedKmPerHour = windSpeed,
         relativeHumidityPercentage = humidity,
         rainPrecipitationPercent = precipitationProbability.toInt(),

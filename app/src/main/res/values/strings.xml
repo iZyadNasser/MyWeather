@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">MyWeather</string>
+    <string name="clear_sky">Clear sky</string>
+    <string name="mainly_clear">Mainly clear</string>
+    <string name="partly_cloudy">Partly cloudy</string>
+    <string name="overcast">Overcast</string>
+    <string name="fog">Fog</string>
+    <string name="depositing_rime_fog">Freezing fog</string>
+    <string name="light_drizzle">Light drizzle</string>
+    <string name="moderate_drizzle">Moderate drizzle</string>
+    <string name="dense_drizzle">Heavy drizzle</string>
+    <string name="light_freezing_drizzle">Light freezing drizzle</string>
+    <string name="dense_freezing_drizzle">Heavy freezing drizzle</string>
+    <string name="slight_rain">Light rain</string>
+    <string name="moderate_rain">Moderate rain</string>
+    <string name="heavy_rain">Heavy rain</string>
+    <string name="light_freezing_rain">Light freezing rain</string>
+    <string name="heavy_freezing_rain">Heavy freezing rain</string>
+    <string name="slight_snow_fall">Light snow</string>
+    <string name="moderate_snow_fall">Moderate snow</string>
+    <string name="heavy_snow_fall">Heavy snow</string>
+    <string name="snow_grains">Snow grains</string>
+    <string name="slight_rain_showers">Light rain showers</string>
+    <string name="moderate_rain_showers">Moderate rain showers</string>
+    <string name="violent_rain_showers">Heavy rain showers</string>
+    <string name="slight_snow_showers">Light snow showers</string>
+    <string name="heavy_snow_showers">Heavy snow showers</string>
+    <string name="slight_or_moderate_thunderstorm">Thunderstorm</string>
+    <string name="thunderstorm_with_slight_hail">Thunderstorm with light hail</string>
+    <string name="thunderstorm_with_heavy_hail">Thunderstorm with heavy hail</string>
 </resources>
