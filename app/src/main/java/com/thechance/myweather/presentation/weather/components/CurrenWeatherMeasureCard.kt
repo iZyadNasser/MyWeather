@@ -71,7 +71,7 @@ fun CurrentWeatherMeasureCard(
         )
 
         Text(
-            text = "$value $unit",
+            text = if (unit in listOf("%", "", "°C")) "$value$unit" else "$value $unit",
             color = theme.textColor.copy(alpha = 0.87f),
             style = TextStyle(
                 fontFamily = Urbanist,
@@ -99,7 +99,6 @@ fun CurrentWeatherMeasureCard(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
-                .padding(bottom = 2.dp)
         )
     }
 }

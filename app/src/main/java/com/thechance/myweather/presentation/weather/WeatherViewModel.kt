@@ -14,11 +14,10 @@ import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
 import com.thechance.myweather.presentation.uiModels.TimeTheme
-import com.thechance.myweather.presentation.uiModels.WeatherMeasure
 import com.thechance.myweather.presentation.uiModels.mapper.toCurrentWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
-import com.thechance.myweather.presentation.utils.UiImage
+import com.thechance.myweather.presentation.utils.formatCityName
 import com.thechance.myweather.presentation.utils.getCurrentWeatherMeasures
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,7 +39,9 @@ class WeatherViewModel(
                 .onSuccess { response ->
                     _state.update {
                         it.copy(
-                            location = response
+                            location = response.copy(
+                                cityName = response.cityName?.formatCityName()
+                            )
                         )
                     }
                 }
