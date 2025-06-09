@@ -11,6 +11,7 @@ import com.thechance.myweather.domain.useCase.WeatherDataHandler
 import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
+import com.thechance.myweather.presentation.uiModels.TimeTheme
 import com.thechance.myweather.presentation.uiModels.mapper.toCurrentWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
@@ -64,7 +65,8 @@ class WeatherViewModel(
             it.copy(
                 currentWeather = getCurrentWeather(response),
                 hourlyWeather = getHourlyWeather(response),
-                dailyWeather = getDailyWeather(response)
+                dailyWeather = getDailyWeather(response),
+                timeTheme = getTimeTheme(response.first())
             )
         }
     }
@@ -108,6 +110,14 @@ class WeatherViewModel(
             .map {
                 it.toDailyWeather()
             }
+    }
+
+    private fun getTimeTheme(weather: Weather): TimeTheme {
+        return if (weather.isDay) {
+            TimeTheme.DAY
+        } else {
+            TimeTheme.NIGHT
+        }
     }
 
     private fun toggleLoading() {
