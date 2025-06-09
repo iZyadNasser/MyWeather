@@ -53,10 +53,3 @@ private fun PreviewWeatherScreen() {
         )
     }
 }
-
-object DummyInteractionHandler : InteractionHandler {
-    override fun getUserLocation() {
-        TODO("Not yet implemented")
-    }
-
-}

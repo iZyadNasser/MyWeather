@@ -57,7 +57,7 @@ class WeatherDataHandler private constructor() {
             }
         }
 
-        fun sortWeatherData() {
+        private fun sortWeatherData() {
             weatherData = weatherData.sortedBy { it.time }
         }
 

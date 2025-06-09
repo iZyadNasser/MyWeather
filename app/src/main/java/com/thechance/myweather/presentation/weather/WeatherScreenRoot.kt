@@ -13,8 +13,6 @@ fun WeatherScreenRoot() {
     val weatherViewModel: WeatherViewModel = koinViewModel()
     val uiState = weatherViewModel.state.collectAsStateWithLifecycle()
 
-    //val interactionHandler: InteractionHandler = getKoin().get()
-
     val locationPermissions = rememberMultiplePermissionsState(
         permissions = listOf(
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -26,7 +24,7 @@ fun WeatherScreenRoot() {
         if (!locationPermissions.allPermissionsGranted || locationPermissions.shouldShowRationale) {
             locationPermissions.launchMultiplePermissionRequest()
         } else {
-            weatherViewModel.getUserLocation()
+            weatherViewModel.getLocationAndLoadWeather()
         }
     }
 
