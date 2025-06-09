@@ -8,6 +8,8 @@ import com.thechance.myweather.domain.model.Weather
 import com.thechance.myweather.domain.useCase.GetUserLocationUseCase
 import com.thechance.myweather.domain.useCase.GetWeatherDataUseCase
 import com.thechance.myweather.domain.useCase.WeatherDataHandler
+import com.thechance.myweather.presentation.ui.theme.DayThemeColor
+import com.thechance.myweather.presentation.ui.theme.NightThemeColor
 import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
@@ -69,7 +71,22 @@ class WeatherViewModel(
                 currentWeather = getCurrentWeather(response),
                 hourlyWeather = getHourlyWeather(response),
                 dailyWeather = getDailyWeather(response),
-                timeTheme = getTimeTheme(response.first()),
+            )
+        }
+
+        _state.update {
+            it.copy(
+                timeTheme = getTimeTheme(it.currentWeather?.isDay != false)
+            )
+        }
+
+        _state.update {
+            it.copy(
+                themeColor = if (it.timeTheme == TimeTheme.DAY) {
+                    DayThemeColor
+                } else {
+                    NightThemeColor
+                }
             )
         }
 
@@ -121,8 +138,8 @@ class WeatherViewModel(
             }
     }
 
-    private fun getTimeTheme(weather: Weather): TimeTheme {
-        return if (weather.isDay) {
+    private fun getTimeTheme(isDay: Boolean): TimeTheme {
+        return if (isDay) {
             TimeTheme.DAY
         } else {
             TimeTheme.NIGHT

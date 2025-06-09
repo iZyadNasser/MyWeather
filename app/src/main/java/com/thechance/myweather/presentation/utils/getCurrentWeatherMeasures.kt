@@ -11,7 +11,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_fast_wind),
-            value = currentWeather?.windSpeedKmPerHour.toString(),
+            value = currentWeather?.windSpeedKmPerHour?.toInt().toString(),
             unit = UiText.StringResource(R.string.km_h),
             measure = UiText.StringResource(R.string.wind)
         )
@@ -21,7 +21,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_humidity),
-            value = currentWeather?.relativeHumidityPercentage.toString(),
+            value = currentWeather?.relativeHumidityPercentage?.toInt().toString(),
             unit = UiText.DynamicString("%"),
             measure = UiText.StringResource(R.string.humidity)
         )
@@ -31,7 +31,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_rain),
-            value = currentWeather?.rainPrecipitationPercent.toString(),
+            value = currentWeather?.rainPrecipitationPercent?.toInt().toString(),
             unit = UiText.DynamicString("%"),
             measure = UiText.StringResource(R.string.rain)
         )
@@ -41,7 +41,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_uv_index),
-            value = currentWeather?.uvIndex.toString(),
+            value = currentWeather?.uvIndex?.toInt().toString(),
             unit = UiText.DynamicString(""),
             measure = UiText.StringResource(R.string.uv_index)
         )
@@ -51,7 +51,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_arrow_down),
-            value = currentWeather?.pressureMslHPerA.toString(),
+            value = currentWeather?.pressureMslHPerA?.toInt().toString(),
             unit = UiText.StringResource(R.string.hpa),
             measure = UiText.StringResource(R.string.pressure)
         )
@@ -61,7 +61,7 @@ fun getCurrentWeatherMeasures(currentWeather: CurrentWeather?): List<WeatherMeas
     weatherMeasures.add(
         WeatherMeasure(
             image = UiImage.Drawable(R.drawable.ic_temperature),
-            value = currentWeather?.feelsLikeTemperatureCelsius.toString(),
+            value = currentWeather?.feelsLikeTemperatureCelsius?.toInt().toString(),
             unit = UiText.StringResource(R.string.celsius),
             measure = UiText.StringResource(R.string.feels_like)
         )

@@ -32,6 +32,7 @@ import com.thechance.myweather.presentation.ui.theme.ThemeColor
 import com.thechance.myweather.presentation.ui.theme.Urbanist
 import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.weather.components.CurrentWeatherHeader
+import com.thechance.myweather.presentation.weather.components.CurrentWeatherMeasuresSection
 
 @Composable
 fun WeatherScreen(
@@ -64,6 +65,12 @@ fun WeatherScreen(
             scrollState = scrollState,
             themeColor = themeColor,
             currentWeather = state.currentWeather,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        CurrentWeatherMeasuresSection(
+            measures = state.currentWeatherMeasures,
+            themeColor = themeColor,
             modifier = Modifier.padding(bottom = 24.dp)
         )
     }
