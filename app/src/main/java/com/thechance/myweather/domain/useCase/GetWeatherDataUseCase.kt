@@ -10,7 +10,7 @@ class GetWeatherDataUseCase(
         return weatherDataSource.get8DaysWeatherData(lat, lon)
             .onSuccess {
                 Result.success(
-                    WeatherDataParser.sortWeatherData(it)
+                    WeatherDataHandler.sortWeatherData(it)
                 )
             }
             .onFailure {

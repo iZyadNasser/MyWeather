@@ -1,9 +1,10 @@
 package com.thechance.myweather.domain.useCase
 
 import com.thechance.myweather.domain.model.Weather
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 
-class WeatherDataParser private constructor() {
+class WeatherDataHandler private constructor() {
 
     fun getCurrentWeather(): Weather {
         return weatherData.first()
@@ -19,23 +20,35 @@ class WeatherDataParser private constructor() {
         }
     }
 
+    fun getHighestTemperatureOfDate(date: LocalDate): Weather {
+        return weatherData
+            .filter { it.time.date == date }
+            .maxBy { it.temperatureCelsius }
+    }
+
+    fun getLowestTemperatureOfDate(date: LocalDate): Weather {
+        return weatherData
+            .filter { it.time.date == date }
+            .minBy { it.temperatureCelsius }
+    }
+
     companion object {
 
-        private var instance: WeatherDataParser? = null
+        private var instance: WeatherDataHandler? = null
         private lateinit var weatherData: List<Weather>
         private lateinit var currentTime: LocalDateTime
 
         fun setupWeatherFormatter(
             weatherList: List<Weather>,
             time: LocalDateTime
-        ): WeatherDataParser {
+        ): WeatherDataHandler {
             weatherData = weatherList
             currentTime = time
 
             sortWeatherData()
             filterWeatherDataToOnlyRemainingHours()
 
-            return instance ?: WeatherDataParser().also { instance = it }
+            return instance ?: WeatherDataHandler().also { instance = it }
         }
 
         private fun filterWeatherDataToOnlyRemainingHours() {

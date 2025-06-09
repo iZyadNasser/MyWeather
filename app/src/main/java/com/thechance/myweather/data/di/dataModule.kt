@@ -3,7 +3,9 @@ package com.thechance.myweather.data.di
 import com.google.android.gms.location.LocationServices
 import com.thechance.myweather.data.config.HttpClientFactory
 import com.thechance.myweather.data.dataSource.LocationDataSourceImpl
+import com.thechance.myweather.data.dataSource.WeatherDataSourceImpl
 import com.thechance.myweather.domain.dataSource.LocationDataSource
+import com.thechance.myweather.domain.dataSource.WeatherDataSource
 import io.ktor.client.engine.okhttp.OkHttp
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -33,5 +35,9 @@ val dataModule = module {
 
     single<LocationDataSource> {
         LocationDataSourceImpl(get(), get())
+    }
+
+    single<WeatherDataSource> {
+        WeatherDataSourceImpl(get())
     }
 }
