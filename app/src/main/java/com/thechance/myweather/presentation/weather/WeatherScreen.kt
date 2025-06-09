@@ -13,7 +13,6 @@ import com.thechance.myweather.presentation.ui.theme.MyWeatherTheme
 fun WeatherScreen(
     modifier: Modifier = Modifier,
     state: WeatherState,
-    interactionHandler: InteractionHandler
 ) {
     Column {
         if (!state.isLoading) {
@@ -51,7 +50,6 @@ private fun PreviewWeatherScreen() {
     MyWeatherTheme {
         WeatherScreen(
             state = WeatherState(),
-            interactionHandler = DummyInteractionHandler
         )
     }
 }

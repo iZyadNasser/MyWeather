@@ -8,7 +8,7 @@ import org.koin.dsl.module
 val presentationModule = module {
     viewModelOf(::WeatherViewModel)
 
-    single<InteractionHandler> {
-        get<WeatherViewModel>()
-    }
+//    single<InteractionHandler> {
+//        get<WeatherViewModel>()
+//    }
 }

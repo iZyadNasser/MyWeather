@@ -7,7 +7,7 @@ class GetUserLocationUseCase(
     private val locationDataSource: LocationDataSource
 ) {
 
-    suspend fun invoke(): Result<UserLocation> {
+    suspend operator fun invoke(): Result<UserLocation> {
         return locationDataSource.getCurrentLocation()
     }
 }

@@ -11,17 +11,19 @@ import kotlinx.coroutines.launch
 
 class WeatherViewModel(
     private val getUserLocationUseCase: GetUserLocationUseCase
-): ViewModel(), InteractionHandler {
+): ViewModel() {
 
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
 
-    override fun getUserLocation() {
+    fun getUserLocation() {
         viewModelScope.launch {
+            Log.e("TAG", "${state.value.location?.cityName}: ", )
+            Log.e("TAG", "${state.value.location?.longitude}: ", )
+            Log.e("TAG", "${state.value.location?.latitude}: ", )
             toggleLoading()
-            getUserLocationUseCase.invoke()
+            getUserLocationUseCase()
                 .onSuccess { response ->
-
                     _state.update {
                         it.copy(
                             location = response
@@ -32,6 +34,8 @@ class WeatherViewModel(
                     handleError(it)
                 }
             Log.e("TAG", "${state.value.location?.cityName}: ", )
+            Log.e("TAG", "${state.value.location?.longitude}: ", )
+            Log.e("TAG", "${state.value.location?.latitude}: ", )
             toggleLoading()
         }
 
