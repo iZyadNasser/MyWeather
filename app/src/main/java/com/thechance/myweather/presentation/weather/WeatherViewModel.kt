@@ -37,23 +37,20 @@ class WeatherViewModel(
                 }
 
             loadWeatherData()
-            Log.e("TEST", "${state.value.currentWeather}", )
-            Log.e("TEST", "${state.value.hourlyWeather}", )
-            Log.e("TEST", "${state.value.dailyWeather}", )
             toggleLoading()
         }
 
     }
 
     private suspend fun loadWeatherData() {
-            getWeatherUseCase(
-                lat = state.value.location?.latitude ?: 0.0,
-                lon = state.value.location?.longitude ?: 0.0
-            ).onSuccess { response ->
-                parseAndSaveWeatherData(response)
-            }.onFailure {
-                handleError(it)
-            }
+        getWeatherUseCase(
+            lat = state.value.location?.latitude ?: 0.0,
+            lon = state.value.location?.longitude ?: 0.0
+        ).onSuccess { response ->
+            parseAndSaveWeatherData(response)
+        }.onFailure {
+            handleError(it)
+        }
     }
 
     private fun parseAndSaveWeatherData(response: List<Weather>) {
