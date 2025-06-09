@@ -82,4 +82,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.play.services)
 
     implementation(libs.kotlinx.datetime)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }

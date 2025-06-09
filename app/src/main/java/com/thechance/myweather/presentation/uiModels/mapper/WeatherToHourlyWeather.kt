@@ -7,7 +7,7 @@ fun Weather.toHourlyWeather(): HourlyWeather {
     return HourlyWeather(
         hour = time.hour,
         temperatureCelsius = temperatureCelsius,
-        weatherImage = this.weatherStatus.getWeatherImage(),
+        weatherImage = this.weatherStatus.getWeatherImage(this.isDay.toTimeTheme()),
         weatherDescription = this.weatherStatus.getWeatherDescription()
     )
 }
