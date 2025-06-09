@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.thechance.myweather.presentation.ui.theme.DayThemeColor
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -30,5 +31,6 @@ fun WeatherScreenRoot() {
 
     WeatherScreen(
         state = uiState.value,
+        themeColor = DayThemeColor // TODO
     )
 }

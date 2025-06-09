@@ -8,6 +8,12 @@ import com.thechance.myweather.domain.model.Weather
 import com.thechance.myweather.domain.useCase.GetUserLocationUseCase
 import com.thechance.myweather.domain.useCase.GetWeatherDataUseCase
 import com.thechance.myweather.domain.useCase.WeatherDataHandler
+import com.thechance.myweather.presentation.uiModels.CurrentWeather
+import com.thechance.myweather.presentation.uiModels.DailyWeather
+import com.thechance.myweather.presentation.uiModels.HourlyWeather
+import com.thechance.myweather.presentation.uiModels.mapper.toCurrentWeather
+import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
+import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -54,18 +60,54 @@ class WeatherViewModel(
     }
 
     private fun parseAndSaveWeatherData(response: List<Weather>) {
+        _state.update {
+            it.copy(
+                currentWeather = getCurrentWeather(response),
+                hourlyWeather = getHourlyWeather(response),
+                dailyWeather = getDailyWeather(response)
+            )
+        }
+    }
+
+    private fun getCurrentWeather(weatherList: List<Weather>): CurrentWeather {
         val weatherDataHandler = WeatherDataHandler.setupWeatherFormatter(
-            weatherList = response,
+            weatherList = weatherList,
             time = getCurrentSystemDateTime()
         )
 
-        _state.update {
-            it.copy(
-                currentWeather = weatherDataHandler.getCurrentWeather(),
-                hourlyWeather = weatherDataHandler.getNext24HoursHourlyWeather(),
-                dailyWeather = weatherDataHandler.getNext7DaysDailyWeather()
-            )
-        }
+        return weatherDataHandler
+            .getCurrentWeather()
+            .let {
+                it.toCurrentWeather(
+                    maxTemperatureCelsius = weatherDataHandler.getHighestTemperatureOfDate(it.time.date).temperatureCelsius,
+                    minTemperatureCelsius = weatherDataHandler.getLowestTemperatureOfDate(it.time.date).temperatureCelsius
+                )
+            }
+    }
+
+    private fun getHourlyWeather(weatherList: List<Weather>): List<HourlyWeather> {
+        val weatherDataHandler = WeatherDataHandler.setupWeatherFormatter(
+            weatherList = weatherList,
+            time = getCurrentSystemDateTime()
+        )
+
+        return weatherDataHandler
+            .getNext24HoursHourlyWeather()
+            .map { it.toHourlyWeather() }
+    }
+
+    private fun getDailyWeather(weatherList: List<Weather>): List<DailyWeather> {
+        val weatherDataHandler = WeatherDataHandler.setupWeatherFormatter(
+            weatherList = weatherList,
+            time = getCurrentSystemDateTime()
+        )
+
+        return weatherDataHandler
+            .getNext7DaysDailyWeather()
+            .chunked(24)
+            .map {
+                it.toDailyWeather()
+            }
     }
 
     private fun toggleLoading() {
