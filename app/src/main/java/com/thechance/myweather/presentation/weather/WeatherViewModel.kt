@@ -12,9 +12,12 @@ import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
 import com.thechance.myweather.presentation.uiModels.TimeTheme
+import com.thechance.myweather.presentation.uiModels.WeatherMeasure
 import com.thechance.myweather.presentation.uiModels.mapper.toCurrentWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
+import com.thechance.myweather.presentation.utils.UiImage
+import com.thechance.myweather.presentation.utils.getCurrentWeatherMeasures
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -66,7 +69,13 @@ class WeatherViewModel(
                 currentWeather = getCurrentWeather(response),
                 hourlyWeather = getHourlyWeather(response),
                 dailyWeather = getDailyWeather(response),
-                timeTheme = getTimeTheme(response.first())
+                timeTheme = getTimeTheme(response.first()),
+            )
+        }
+
+        _state.update {
+            it.copy(
+                currentWeatherMeasures = getCurrentWeatherMeasures(state.value.currentWeather)
             )
         }
     }

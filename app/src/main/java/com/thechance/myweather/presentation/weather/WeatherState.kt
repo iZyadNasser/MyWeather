@@ -9,6 +9,7 @@ import com.thechance.myweather.presentation.uiModels.CurrentWeather
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
 import com.thechance.myweather.presentation.uiModels.TimeTheme
+import com.thechance.myweather.presentation.uiModels.WeatherMeasure
 
 @Immutable
 data class WeatherState(
@@ -18,5 +19,6 @@ data class WeatherState(
     val currentWeather: CurrentWeather? = null,
     val hourlyWeather: List<HourlyWeather> = emptyList(),
     val dailyWeather: List<DailyWeather> = emptyList(),
-    val themeColor: ThemeColor = DayThemeColor
+    val themeColor: ThemeColor = DayThemeColor,
+    val currentWeatherMeasures: List<WeatherMeasure> = emptyList(),
 )

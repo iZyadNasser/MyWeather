@@ -14,4 +14,10 @@ sealed class UiImage {
             is Drawable -> painterResource(id = this.id)
         }
     }
+
+    @DrawableRes fun asResource(): Int {
+        return when (this) {
+            is Drawable -> this.id
+        }
+    }
 }

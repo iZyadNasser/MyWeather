@@ -28,4 +28,14 @@
     <string name="slight_or_moderate_thunderstorm">Thunderstorm</string>
     <string name="thunderstorm_with_slight_hail">Thunderstorm with light hail</string>
     <string name="thunderstorm_with_heavy_hail">Thunderstorm with heavy hail</string>
+    <string name="location">location</string>
+    <string name="km_h">KM/h</string>
+    <string name="wind">Wind</string>
+    <string name="humidity">Humidity</string>
+    <string name="rain">Rain</string>
+    <string name="uv_index">UV Index</string>
+    <string name="hpa">hPa</string>
+    <string name="pressure">Pressure</string>
+    <string name="celsius">°C</string>
+    <string name="feels_like">Feels like</string>
 </resources>
