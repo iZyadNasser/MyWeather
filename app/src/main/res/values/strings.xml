@@ -39,4 +39,7 @@
     <string name="celsius">°C</string>
     <string name="feels_like">Feels like</string>
     <string name="today">Today</string>
+    <string name="highest_temperature">Highest temperature</string>
+    <string name="lowest_temperature">Lowest Temperature</string>
+    <string name="next_7_days">Next 7 days</string>
 </resources>
