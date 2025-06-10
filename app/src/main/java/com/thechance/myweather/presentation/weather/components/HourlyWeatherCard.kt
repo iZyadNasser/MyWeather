@@ -119,7 +119,7 @@ fun HourlyWeatherCard(
 @Composable
 private fun PreviewHourlyWeatherCard() {
     HourlyWeatherCard(
-        image = UiImage.Drawable(id = R.drawable.im_mainly_clear),
+        image = UiImage.Drawable(id = R.drawable.light_mainly_clear),
         status = "Mainly Clear",
         value = "25",
         unit = "°C",
