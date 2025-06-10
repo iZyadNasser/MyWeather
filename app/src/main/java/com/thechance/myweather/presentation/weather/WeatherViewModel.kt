@@ -1,6 +1,5 @@
 package com.thechance.myweather.presentation.weather
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thechance.myweather.core.utils.getCurrentSystemDateTime
@@ -19,6 +18,7 @@ import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
 import com.thechance.myweather.presentation.utils.formatCityName
 import com.thechance.myweather.presentation.utils.getCurrentWeatherMeasures
+import com.thechance.myweather.presentation.utils.handleError
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,7 +51,7 @@ class WeatherViewModel(
                     }
                 }
                 .onFailure {
-                    handleError(it)
+                    handleScreenError(it)
                 }
 
             loadWeatherData()
@@ -67,7 +67,7 @@ class WeatherViewModel(
         ).onSuccess { response ->
             parseAndSaveWeatherData(response)
         }.onFailure {
-            handleError(it)
+            handleScreenError(it)
         }
     }
 
@@ -160,8 +160,13 @@ class WeatherViewModel(
         }
     }
 
-    private fun handleError(throwable: Throwable) {
-        Log.e("TAG", "handleError: ")
-        /*TODO*/
+    private fun handleScreenError(throwable: Throwable) {
+        viewModelScope.launch {
+            _event.send(
+                WeatherEvent.HandleError(
+                    message = handleError(throwable)
+                )
+            )
+        }
     }
 }
