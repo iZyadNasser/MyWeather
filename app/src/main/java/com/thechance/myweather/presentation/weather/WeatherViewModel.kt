@@ -147,7 +147,7 @@ class WeatherViewModel(
         }
     }
 
-    private fun toggleLoading() {
+    fun toggleLoading() {
         _state.update {
             it.copy(
                 isLoading = !it.isLoading

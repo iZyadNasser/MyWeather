@@ -12,20 +12,17 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun WeatherScreenRoot() {
     val weatherViewModel: WeatherViewModel = koinViewModel()
-    val uiState = weatherViewModel.state.collectAsStateWithLifecycle()
 
     PermissionForLocationScreen(weatherViewModel)
-
-    WeatherScreen(
-        state = uiState.value
-    )
 }
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun PermissionForLocationScreen(
-    weatherViewModel: WeatherViewModel
+    weatherViewModel: WeatherViewModel,
 ) {
+    val uiState = weatherViewModel.state.collectAsStateWithLifecycle()
+
     val locationPermissions = rememberMultiplePermissionsState(
         permissions = listOf(
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -33,11 +30,17 @@ fun PermissionForLocationScreen(
         )
     )
 
-    LaunchedEffect(locationPermissions.allPermissionsGranted || locationPermissions.shouldShowRationale) {
-        if (!locationPermissions.allPermissionsGranted || locationPermissions.shouldShowRationale) {
+    LaunchedEffect(locationPermissions.allPermissionsGranted) {
+        if (!locationPermissions.allPermissionsGranted) {
             locationPermissions.launchMultiplePermissionRequest()
         } else {
             weatherViewModel.getLocationAndLoadWeather()
         }
+    }
+
+    if (locationPermissions.allPermissionsGranted) {
+        WeatherScreen(
+            state = uiState.value
+        )
     }
 }
