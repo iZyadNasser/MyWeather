@@ -44,7 +44,6 @@ import com.thechance.myweather.presentation.ui.theme.Urbanist
 import com.thechance.myweather.presentation.uiModels.DailyWeather
 import com.thechance.myweather.presentation.uiModels.HourlyWeather
 import com.thechance.myweather.presentation.utils.formatHour
-import com.thechance.myweather.presentation.utils.formatWeekDay
 import com.thechance.myweather.presentation.utils.to12HourFormat
 import com.thechance.myweather.presentation.weather.components.CurrentWeatherHeader
 import com.thechance.myweather.presentation.weather.components.CurrentWeatherMeasuresSection
