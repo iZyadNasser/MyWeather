@@ -108,9 +108,10 @@ fun HourlyWeatherCard(
         Image(
             painter = image.asPainter(),
             contentDescription = status,
-            contentScale = ContentScale.FillHeight,
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .height(58.dp)
+                .width(64.dp)
         )
     }
 }
