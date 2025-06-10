@@ -1,14 +1,21 @@
 [versions]
-agp = "8.10.1"
-kotlin = "2.0.21"
-coreKtx = "1.16.0"
+coilNetworkOkhttp = "3.2.0"
+kotlinxCoroutinesPlayServices = "1.9.0"
+kotlinxDatetime = "0.5.0"
+accompanistPermissions = "0.36.0"
+playServicesLocation = "21.3.0"
+agp = "8.5.2"
+kotlin = "2.0.20"
+coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.9.0"
-activityCompose = "1.10.1"
-composeBom = "2024.09.00"
-ksp = "2.0.20-1.0.24"
+lifecycleRuntimeKtx = "2.8.6"
+activityCompose = "1.9.2"
+composeBom = "2024.09.02"
+kotlinxCoroutinesAndroid = "1.8.1"
+kotlinxCoroutinesCore = "1.8.1"
+kotlinxSerializationJson = "1.7.1"
 ktorServerContentNegotiation = "3.0.0"
 loggingInterceptor = "5.0.0-alpha.14"
 ktorClientOkhttp = "3.0.0"
@@ -16,14 +23,13 @@ ktorClientCore = "3.0.0"
 ktorSerializationKotlinxJson = "3.0.0"
 koin = "3.5.6"
 ktor = "3.0.0"
-kotlinxCoroutinesAndroid = "1.8.1"
-kotlinxCoroutinesCore = "1.8.1"
-kotlinxSerializationJson = "1.7.1"
-accompanistPermissions = "0.36.0"
-playServicesLocation = "21.3.0"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilNetworkOkhttp" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
