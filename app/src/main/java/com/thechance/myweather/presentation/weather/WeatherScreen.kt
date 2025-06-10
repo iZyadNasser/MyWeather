@@ -78,27 +78,15 @@ fun WeatherScreen(
                 .fillMaxSize()
                 .background(themeColor.backgroundGradientColor)
                 .statusBarsPadding()
-                .padding(
-                    top = 24.dp,
-                    bottom = 32.dp
-                )
+                .padding(bottom = 32.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LocationRow(
-                themeColor = themeColor,
-                cityName = state.location?.cityName ?: "Damietta",
-                modifier = Modifier.padding(
-                    start = 12.dp,
-                    end = 12.dp,
-                    bottom = 12.dp
-                )
-            )
-
             CurrentWeatherHeader(
                 scrollState = scrollState,
                 themeColor = themeColor,
                 currentWeather = state.currentWeather,
+                cityName = state.location?.cityName ?: "Unknown City",
                 modifier = Modifier.padding(
                     start = 12.dp,
                     end = 12.dp,
@@ -132,39 +120,6 @@ fun WeatherScreen(
                 )
             )
         }
-    }
-}
-
-@Composable
-private fun LocationRow(
-    themeColor: ThemeColor,
-    cityName: String,
-    modifier: Modifier = Modifier,
-) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_location),
-            contentDescription = stringResource(R.string.location),
-            tint = themeColor.secondaryTextColor,
-            modifier = Modifier.padding(end = 4.dp)
-        )
-
-        Text(
-            text = cityName,
-            style = TextStyle(
-                fontFamily = Urbanist,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                lineHeight = 20.sp,
-                letterSpacing = 0.25.sp
-            ),
-            color = themeColor.secondaryTextColor
-        )
     }
 }
 
