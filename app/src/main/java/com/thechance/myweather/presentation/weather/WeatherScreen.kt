@@ -58,7 +58,7 @@ import com.thechance.myweather.presentation.weather.components.DailyWeatherRow
 import com.thechance.myweather.presentation.weather.components.HourlyWeatherCard
 
 const val TRANSITION_DISTANCE = 5f
-const val ANIMATION_DURATION = 250
+const val ANIMATION_DURATION = 300
 
 @Composable
 fun WeatherScreen(
@@ -67,7 +67,6 @@ fun WeatherScreen(
     val themeColor = state.themeColor
     val scrollState = rememberScrollState()
     val scrollProgress = (scrollState.value / TRANSITION_DISTANCE).coerceIn(0f, 1f)
-
 
     val animateContentOffset by animateIntOffsetAsState(
         targetValue = lerp(IntOffset(0, 0), IntOffset(0, -(90)), scrollProgress),
