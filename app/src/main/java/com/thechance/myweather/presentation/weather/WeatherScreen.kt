@@ -68,7 +68,6 @@ fun WeatherScreen(
     val scrollState = rememberScrollState()
     val scrollProgress = (scrollState.value / TRANSITION_DISTANCE).coerceIn(0f, 1f)
 
-
     val animateContentOffset by animateIntOffsetAsState(
         targetValue = lerp(IntOffset(0, 0), IntOffset(0, -(90)), scrollProgress),
         animationSpec = tween(ANIMATION_DURATION, easing = FastOutSlowInEasing),

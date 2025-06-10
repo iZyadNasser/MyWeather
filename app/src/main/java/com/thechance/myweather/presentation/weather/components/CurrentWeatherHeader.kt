@@ -81,7 +81,6 @@ fun CurrentWeatherHeader(
     ) {
         WeatherIllustration(
             illustrationHeight = illustrationHeight,
-            isCompact = false,
             currentWeather = currentWeather,
             modifier = Modifier
                 .offset(illustrationOffset.x.dp, illustrationOffset.y.dp)
@@ -101,16 +100,14 @@ fun CurrentWeatherHeader(
 @Composable
 fun WeatherIllustration(
     illustrationHeight: Dp,
-    isCompact: Boolean,
     currentWeather: CurrentWeather?,
     modifier: Modifier = Modifier
 ) {
 
     Box(
         modifier = modifier
-            .fillMaxWidth()
-        ,
-        contentAlignment = if (isCompact) Alignment.BottomStart else Alignment.BottomCenter
+            .fillMaxWidth(),
+        contentAlignment = Alignment.BottomCenter
     ) {
         currentWeather?.weatherImage?.let {
             Image(
