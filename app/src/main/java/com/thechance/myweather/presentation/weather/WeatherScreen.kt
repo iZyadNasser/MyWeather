@@ -58,7 +58,7 @@ import com.thechance.myweather.presentation.weather.components.DailyWeatherRow
 import com.thechance.myweather.presentation.weather.components.HourlyWeatherCard
 
 const val TRANSITION_DISTANCE = 5f
-const val ANIMATION_DURATION = 250
+const val ANIMATION_DURATION = 300
 
 @Composable
 fun WeatherScreen(

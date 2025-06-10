@@ -19,8 +19,10 @@ import com.thechance.myweather.presentation.uiModels.mapper.toDailyWeather
 import com.thechance.myweather.presentation.uiModels.mapper.toHourlyWeather
 import com.thechance.myweather.presentation.utils.formatCityName
 import com.thechance.myweather.presentation.utils.getCurrentWeatherMeasures
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -31,6 +33,9 @@ class WeatherViewModel(
 
     private val _state = MutableStateFlow(WeatherState())
     val state = _state.asStateFlow()
+
+    private val _event = Channel<WeatherEvent>()
+    val event = _event.receiveAsFlow()
 
     override fun getLocationAndLoadWeather() {
         viewModelScope.launch {

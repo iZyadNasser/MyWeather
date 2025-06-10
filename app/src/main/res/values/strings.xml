@@ -42,4 +42,11 @@
     <string name="highest_temperature">Highest temperature</string>
     <string name="lowest_temperature">Lowest Temperature</string>
     <string name="next_7_days">Next 7 days</string>
+    <string name="unkown_error_happend">Unkown error happend</string>
+    <string name="server_error">Server error</string>
+    <string name="request_timeout_error">Request took too much time</string>
+    <string name="too_many_requests_error">Too many reloads</string>
+    <string name="location_permission_error">Couldn\'t get location</string>
+    <string name="unauthorized_error">You are not authorized</string>
+
 </resources>
