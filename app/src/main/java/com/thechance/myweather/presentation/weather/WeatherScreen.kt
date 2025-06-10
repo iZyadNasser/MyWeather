@@ -1,5 +1,8 @@
 package com.thechance.myweather.presentation.weather
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateIntOffsetAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyRow
@@ -22,6 +26,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,7 +38,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.thechance.myweather.R
 import com.thechance.myweather.presentation.ui.theme.DayThemeColor
@@ -50,12 +57,23 @@ import com.thechance.myweather.presentation.weather.components.CurrentWeatherMea
 import com.thechance.myweather.presentation.weather.components.DailyWeatherRow
 import com.thechance.myweather.presentation.weather.components.HourlyWeatherCard
 
+const val TRANSITION_DISTANCE = 90f
+const val ANIMATION_DURATION = 250
+
 @Composable
 fun WeatherScreen(
     state: WeatherState,
 ) {
     val themeColor = state.themeColor
     val scrollState = rememberScrollState()
+    val scrollProgress = (scrollState.value / TRANSITION_DISTANCE).coerceIn(0f, 1f)
+
+
+    val animateContentOffset by animateIntOffsetAsState(
+        targetValue = lerp(IntOffset(0, 0), IntOffset(0, -(90)), scrollProgress),
+        animationSpec = tween(ANIMATION_DURATION, easing = FastOutSlowInEasing),
+        label = "content_offset"
+    )
 
     if (state.isLoading) {
         Box(
@@ -78,15 +96,26 @@ fun WeatherScreen(
                 .fillMaxSize()
                 .background(themeColor.backgroundGradientColor)
                 .statusBarsPadding()
-                .padding(bottom = 32.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            LocationRow(
+                themeColor = themeColor,
+                cityName = state.location?.cityName ?: "Unknown City",
+                modifier = Modifier.padding(
+                    start = 12.dp,
+                    end = 12.dp,
+                    bottom = 12.dp,
+                    top = 24.dp,
+                )
+            )
+
             CurrentWeatherHeader(
-                scrollState = scrollState,
+                scrollProgress = scrollProgress,
                 themeColor = themeColor,
                 currentWeather = state.currentWeather,
-                cityName = state.location?.cityName ?: "Unknown City",
+                unit = stringResource(R.string.celsius),
                 modifier = Modifier.padding(
                     start = 12.dp,
                     end = 12.dp,
@@ -102,12 +131,14 @@ fun WeatherScreen(
                     end = 12.dp,
                     bottom = 24.dp
                 )
+                    .offset(animateContentOffset.x.dp, animateContentOffset.y.dp)
             )
 
             TodayWeatherSection(
                 hourlyWeather = state.hourlyWeather,
                 themeColor = themeColor,
                 modifier = Modifier.padding(bottom = 24.dp)
+                    .offset(animateContentOffset.x.dp, animateContentOffset.y.dp)
             )
 
             DailyWeatherSection(
@@ -118,8 +149,42 @@ fun WeatherScreen(
                     end = 12.dp,
                     bottom = 24.dp
                 )
+                    .offset(animateContentOffset.x.dp, animateContentOffset.y.dp)
             )
         }
+    }
+}
+
+@Composable
+private fun LocationRow(
+    themeColor: ThemeColor,
+    cityName: String,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Icon(
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_location),
+            contentDescription = stringResource(R.string.location),
+            tint = themeColor.secondaryTextColor,
+            modifier = Modifier.padding(end = 4.dp)
+        )
+
+        Text(
+            text = cityName,
+            style = TextStyle(
+                fontFamily = Urbanist,
+                fontWeight = FontWeight.Medium,
+                fontSize = 16.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.25.sp
+            ),
+            color = themeColor.secondaryTextColor
+        )
     }
 }
 

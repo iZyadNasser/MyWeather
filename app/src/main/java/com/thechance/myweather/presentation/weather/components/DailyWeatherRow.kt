@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
@@ -70,6 +71,7 @@ fun DailyWeatherRow(
             Image(
                 painter = image.asPainter(),
                 contentDescription = weatherDescription,
+                contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .height(32.dp)
             )
